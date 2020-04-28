@@ -3,6 +3,7 @@ include("config.php");
 include("classes/SiteResultsProvider.php");
 include("classes/ImageResultsProvider.php");
 
+
     if(isset($_GET["term"])) {
         $term = $_GET["term"];
     }
