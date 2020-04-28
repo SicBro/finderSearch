@@ -1,7 +1,9 @@
 var timer;
+var searchBar = document.getElementById("searchBar");
+var sticky = searchBar.offsetTop;
 
-$(document).ready(function() {
-  $(".result").on("click", function() {
+$(document).ready(function () {
+  $(".result").on("click", function () {
     var id = $(this).attr("data-linkId");
     var url = $(this).attr("href");
 
@@ -16,7 +18,7 @@ $(document).ready(function() {
 
   var grid = $(".imageResults");
 
-  grid.on("layoutComplete", function() {
+  grid.on("layoutComplete", function () {
     $(".gridItem img").css("visibility", "visible");
   });
 
@@ -24,11 +26,11 @@ $(document).ready(function() {
     itemSelector: ".gridItem",
     columnWidth: 200,
     gutter: 5,
-    isInitLayout: false
+    isInitLayout: false,
   });
 
   $("[data-fancybox]").fancybox({
-    caption: function(instance, item) {
+    caption: function (instance, item) {
       var caption = $(this).data("caption") || "";
       var siteUrl = $(this).data("siteurl") || "";
 
@@ -45,26 +47,26 @@ $(document).ready(function() {
 
       return caption;
     },
-    afterShow: function(instance, item) {
+    afterShow: function (instance, item) {
       increaseImageClicks(item.src);
-    }
+    },
   });
 });
 
 function loadImage(src, className) {
   var image = $("<img>");
 
-  image.on("load", function() {
+  image.on("load", function () {
     $("." + className + " a").append(image);
 
     clearTimeout(timer);
 
-    timer = setTimeout(function() {
+    timer = setTimeout(function () {
       $(".imageResults").masonry();
     }, 500);
   });
 
-  image.on("error", function() {
+  image.on("error", function () {
     $("." + className).remove();
 
     $.post("ajax/setBroken.php", { src: src });
@@ -74,7 +76,9 @@ function loadImage(src, className) {
 }
 
 function increaseLinkClicks(linkId, url) {
-  $.post("ajax/updateLinkCount.php", { linkId: linkId }).done(function(result) {
+  $.post("ajax/updateLinkCount.php", { linkId: linkId }).done(function (
+    result
+  ) {
     if (result != "") {
       alert(result);
       return;
@@ -85,7 +89,7 @@ function increaseLinkClicks(linkId, url) {
 }
 
 function increaseImageClicks(imageUrl) {
-  $.post("ajax/updateImageCount.php", { imageUrl: imageUrl }).done(function(
+  $.post("ajax/updateImageCount.php", { imageUrl: imageUrl }).done(function (
     result
   ) {
     if (result != "") {
@@ -93,4 +97,17 @@ function increaseImageClicks(imageUrl) {
       return;
     }
   });
+}
+
+//sticky searchBar feature
+window.onscroll = function () {
+  stickyfunction();
+};
+
+function stickyfunction() {
+  if (window.pageYOffset > sticky) {
+    searchBar.classList.add("sticky");
+  } else {
+    searchBar.classList.remove("sticky");
+  }
 }

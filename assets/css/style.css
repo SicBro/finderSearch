@@ -64,6 +64,18 @@ body {
   color: #000;
 }
 
+/*sticky nav bar feature */
+.sticky {
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  position: fixed;
+}
+
+.sticky + .mainResultsSection {
+  padding-top: 120px;
+}
+
 .mainSection .logoContainer {
   width: 220px;
   text-align: center;

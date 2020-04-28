@@ -28,9 +28,9 @@ include("classes/ImageResultsProvider.php");
 
 	<div class="wrapper">
 	
-		<div class="header">
+		<div id=searchBar class="header">
 
-
+        
 			<div class="headerContent">
 
 				<div class="logoContainer">
@@ -40,6 +40,7 @@ include("classes/ImageResultsProvider.php");
 				</div>
 
 				<div class="searchContainer">
+
 
 					<form action="search.php" method="GET">
 
