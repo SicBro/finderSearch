@@ -36,6 +36,10 @@ body {
   align-items: center;
 }
 
+input {
+  outline: none !important;
+}
+
 .searchContainer .searchButton {
   color: #757575;
   background-color: #f5f5f5;

@@ -173,6 +173,6 @@ function followLinks($url) {
     }
 }
 
-$startUrl = "http://www.sony.com";
+$startUrl = "http://www.edmunds.com";
 followLinks($startUrl);
 ?>
